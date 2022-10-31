@@ -8,13 +8,13 @@ metadata:
 spec:
   license:
     accept: true
-    license: L-RJON-BZFQU2
+    license: L-RJON-BXUPZ2
     use: NonProduction
   queueManager:
     availability:
-      type: SingleInstance
+      type: NativeHA
     debug: false
-    image: image-registry.openshift-image-registry.svc:5000/ci/mq-qm01:0.0.1
+    image: image-registry.openshift-image-registry.svc:5000/ci/mq-qm01:0.0.2
     imagePullPolicy: Always
     livenessProbe:
       failureThreshold: 1
@@ -45,10 +45,11 @@ spec:
         cpu: "1"
         memory: 1Gi
     storage:
+      defaultClass: ibmc-block-gold
       persistedData:
         enabled: false
       queueManager:
-        type: ephemeral
+        type: persistent-claim
       recoveryLogs:
         enabled: false
   securityContext:
